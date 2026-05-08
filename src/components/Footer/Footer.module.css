@@ -1,0 +1,95 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.my_footer{
+  color: white;
+  padding:5.5%;
+  padding-bottom: 30px;
+  background-color: #151516;
+  /* border: 2px solid yellow; */
+}
+
+.footer_container{
+  display: flex;
+  justify-content: center;
+  gap: 6%;
+  font-size: 20px;
+  margin-bottom: 20px;
+  /* border: 2px solid yellow; */
+}
+
+.section {
+  width: 33%;
+  /* border: 2px solid greenyellow; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.getInTouchSection {
+    width: 40%;
+  }
+
+.footer_container ul{
+  list-style-type: none;
+}
+
+.footer_list_heading{
+  font-weight: 600;
+  padding-left: 20px;
+}
+
+.social_link {
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.social_link:hover {
+  color: #2d48f7; /* or any accent color */
+  text-decoration: underline;
+}
+
+ul li {
+  color: #fff;
+  font-weight: 400;
+  font-size: 15px;
+}
+
+.logo_container{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.logo_container img {
+  width: 80px;
+}
+
+.logo_name{
+  line-height: 1;
+  color: #fff;
+}
+
+.footer_icons{
+  text-align: center;
+  margin-right: 20px;
+}
+
+.footer_icon{
+  font-size: 1.4rem;
+  margin-left: 10px;
+}
+
+hr {
+  margin-bottom: 15px;
+}
+
+.copyRight {
+  text-align: center;
+}

@@ -1,0 +1,7 @@
+.app-container {
+  width: 100%;
+}
+
+.content {
+  flex-grow: 1; /* Allows the content to expand and push the footer down */
+}
