@@ -6,6 +6,9 @@ import ExploreStores from "./components/ExploreStores/ExploreStores";
 import Login from "./components/Auth/Login";
 import Signup from "./components/Auth/Signup";
 
+import AdminDashboard from "./components/Dashboard/AdminDashboard";
+import OwnerDashboard from "./components/Dashboard/OwnerDashboard";
+
 import App from "./routes/App";
 
 const router = createBrowserRouter([
@@ -32,6 +35,15 @@ const router = createBrowserRouter([
       {
         path: "/user/signup",
         element: <Signup />,
+      },
+      {
+        path: "/admin/dashboard",
+        element: <AdminDashboard />,
+      },
+
+      {
+        path: "/owner/dashboard",
+        element: <OwnerDashboard />,
       },
     ],
   },

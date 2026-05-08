@@ -1,0 +1,93 @@
+.container {
+  min-height: 100vh;
+
+  background: #08122e;
+
+  padding: 120px 40px 40px;
+
+  color: white;
+}
+
+.topBar {
+  display: flex;
+  justify-content: flex-end;
+
+  margin-bottom: 20px;
+}
+
+.logoutButton {
+  padding: 12px 20px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: #ef4444;
+  color: white;
+
+  cursor: pointer;
+
+  font-size: 15px;
+
+  transition: 0.3s;
+}
+
+.logoutButton:hover {
+  background: #dc2626;
+}
+
+.heading {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.ratingCard {
+  background: #1e293b;
+
+  padding: 35px;
+
+  border-radius: 18px;
+
+  text-align: center;
+
+  margin-bottom: 40px;
+}
+
+.ratingCard h2 {
+  margin-bottom: 15px;
+}
+
+.ratingCard p {
+  font-size: 40px;
+  color: #facc15;
+  font-weight: bold;
+}
+
+.tableSection {
+  background: #1e293b;
+
+  padding: 30px;
+
+  border-radius: 18px;
+}
+
+.tableSection h2 {
+  margin-bottom: 20px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 15px;
+
+  text-align: left;
+
+  border-bottom: 1px solid #334155;
+}
+
+.table th {
+  color: #94a3b8;
+}

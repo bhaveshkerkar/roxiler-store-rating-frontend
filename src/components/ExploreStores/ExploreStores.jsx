@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import StoreDetailsModal from "./StoreDetailsModal";
 import StoreCard from "./StoreCard";
@@ -30,9 +31,12 @@ const initialStores = [
 ];
 
 const ExploreStores = () => {
+  const navigate = useNavigate();
+
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOption, setSortOption] = useState("");
   const [selectedStore, setSelectedStore] = useState(null);
+
   const [submittedRatings, setSubmittedRatings] = useState([]);
 
   const [storesData, setStoresData] = useState(initialStores);
@@ -77,6 +81,15 @@ const ExploreStores = () => {
 
   return (
     <div className={styles.container}>
+      <div className={styles.topBar}>
+        <button
+          className={styles.logoutButton}
+          onClick={() => navigate("/user/login")}
+        >
+          Logout
+        </button>
+      </div>
+
       <h1 className={styles.heading}>Explore Stores</h1>
 
       <div className={styles.searchContainer}>
@@ -94,8 +107,11 @@ const ExploreStores = () => {
           onChange={(e) => setSortOption(e.target.value)}
         >
           <option value="">Sort By</option>
+
           <option value="highest">Highest Rated</option>
+
           <option value="lowest">Lowest Rated</option>
+
           <option value="az">A-Z</option>
         </select>
       </div>

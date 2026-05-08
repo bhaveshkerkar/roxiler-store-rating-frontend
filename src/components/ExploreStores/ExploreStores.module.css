@@ -5,6 +5,39 @@
   color: white;
 }
 
+.topBar {
+  display: flex;
+  justify-content: flex-end;
+
+  margin-bottom: 30px;
+
+  position: relative;
+  z-index: 10;
+}
+
+.logoutButton {
+  padding: 12px 22px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: #ef4444;
+  color: white;
+
+  cursor: pointer;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  transition: 0.3s;
+
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.logoutButton:hover {
+  background: #dc2626;
+}
+
 .heading {
   text-align: center;
   font-size: 42px;
