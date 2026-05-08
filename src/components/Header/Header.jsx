@@ -10,7 +10,7 @@ const Header = () => {
     <header className={styles.header}>
       <div className={styles.header_container}>
         {/* Logo */}
-        <NavLink to="/roxiler">
+        <NavLink to="/">
           <div className={styles.logo}>
             <img src={logo} alt="roxiler Logo" />
           </div>
@@ -21,7 +21,7 @@ const Header = () => {
           <ul>
             <li>
               <NavLink
-                to="/roxiler"
+                to="/"
                 end
                 className={({ isActive }) =>
                   isActive ? styles.activeLink : null
@@ -32,7 +32,7 @@ const Header = () => {
             </li>
             <li>
               <NavLink
-                to="/roxiler/explore-stores"
+                to="/explore-stores"
                 className={({ isActive }) =>
                   isActive ? styles.activeLink : null
                 }
@@ -42,7 +42,7 @@ const Header = () => {
             </li>
             <li>
               <NavLink
-                to="/roxiler/about"
+                to="/about"
                 className={({ isActive }) =>
                   isActive ? styles.activeLink : null
                 }
@@ -52,7 +52,7 @@ const Header = () => {
             </li>
             <li>
               <NavLink
-                to="/roxiler/contact"
+                to="/contact"
                 className={({ isActive }) =>
                   isActive ? styles.activeLink : null
                 }
@@ -69,7 +69,7 @@ const Header = () => {
             <button
               className={`btn ${styles.login}`}
               onClick={() => {
-                navigate("/roxiler/user/login");
+                navigate("/user/login");
               }}
             >
               Login
@@ -78,7 +78,7 @@ const Header = () => {
             <button
               className={`btn  ${styles.signup}`}
               onClick={() => {
-                navigate("/roxiler/user/signup");
+                navigate("/user/signup");
               }}
             >
               Sign Up
