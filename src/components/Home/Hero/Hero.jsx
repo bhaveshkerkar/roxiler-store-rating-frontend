@@ -10,7 +10,7 @@ const Hero = () => {
     <section className={styles.hero}>
       <div className={styles.video_background}>
         <video autoPlay muted loop>
-          <source src={"  "} type="video/mp4" />
+          <source src={herosectionVideo} type="video/mp4" />
           {/* Your browser does not support the video tag. */}
         </video>
       </div>
