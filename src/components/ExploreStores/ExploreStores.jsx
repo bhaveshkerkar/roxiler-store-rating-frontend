@@ -1,13 +1,127 @@
+import { useState } from "react";
+
+import StoreDetailsModal from "./StoreDetailsModal";
+import StoreCard from "./StoreCard";
+
+import styles from "./ExploreStores.module.css";
+
+const initialStores = [
+  {
+    id: 1,
+    name: "Fresh Mart",
+    address: "Andheri, Mumbai",
+    rating: 4.5,
+    userRating: 4,
+  },
+  {
+    id: 2,
+    name: "Tech Plaza",
+    address: "Pune, Maharashtra",
+    rating: 3.8,
+    userRating: 5,
+  },
+  {
+    id: 3,
+    name: "Coffee Corner",
+    address: "Bandra, Mumbai",
+    rating: 4.2,
+    userRating: 3,
+  },
+];
+
 const ExploreStores = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortOption, setSortOption] = useState("");
+  const [selectedStore, setSelectedStore] = useState(null);
+  const [submittedRatings, setSubmittedRatings] = useState([]);
+
+  const [storesData, setStoresData] = useState(initialStores);
+
+  const handleRating = (storeId, rating) => {
+    const updatedStores = storesData.map((store) =>
+      store.id === storeId ? { ...store, userRating: rating } : store,
+    );
+
+    setStoresData(updatedStores);
+  };
+
+  const handleSubmitRating = (storeId) => {
+    if (!submittedRatings.includes(storeId)) {
+      setSubmittedRatings([...submittedRatings, storeId]);
+
+      alert("Rating submitted successfully!");
+    }
+  };
+
+  const filteredStores = storesData.filter(
+    (store) =>
+      store.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      store.address.toLowerCase().includes(searchTerm.toLowerCase()),
+  );
+
+  const sortedStores = [...filteredStores].sort((a, b) => {
+    if (sortOption === "highest") {
+      return b.rating - a.rating;
+    }
+
+    if (sortOption === "lowest") {
+      return a.rating - b.rating;
+    }
+
+    if (sortOption === "az") {
+      return a.name.localeCompare(b.name);
+    }
+
+    return 0;
+  });
+
   return (
-    <>
-      <br />
-      <br />
-      <br />
-      <br />
-      {/* khaltun code karayla ghee  */}
-      <div>Hello world!</div>
-    </>
+    <div className={styles.container}>
+      <h1 className={styles.heading}>Explore Stores</h1>
+
+      <div className={styles.searchContainer}>
+        <input
+          type="text"
+          placeholder="Search stores..."
+          className={styles.searchInput}
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+
+        <select
+          className={styles.sortSelect}
+          value={sortOption}
+          onChange={(e) => setSortOption(e.target.value)}
+        >
+          <option value="">Sort By</option>
+          <option value="highest">Highest Rated</option>
+          <option value="lowest">Lowest Rated</option>
+          <option value="az">A-Z</option>
+        </select>
+      </div>
+
+      <div className={styles.storeGrid}>
+        {filteredStores.length > 0 ? (
+          sortedStores.map((store) => (
+            <StoreCard
+              key={store.id}
+              store={store}
+              handleRating={handleRating}
+              setSelectedStore={setSelectedStore}
+              handleSubmitRating={handleSubmitRating}
+              submittedRatings={submittedRatings}
+            />
+          ))
+        ) : (
+          <h2 className={styles.noStore}>No Stores Found</h2>
+        )}
+      </div>
+
+      <StoreDetailsModal
+        selectedStore={selectedStore}
+        setSelectedStore={setSelectedStore}
+      />
+    </div>
   );
 };
 

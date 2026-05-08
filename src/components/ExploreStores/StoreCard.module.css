@@ -1,0 +1,57 @@
+.card {
+  background: #1e293b;
+  padding: 25px;
+  border-radius: 18px;
+  transition: 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.card:hover {
+  transform: translateY(-8px);
+}
+
+.storeIcon {
+  font-size: 45px;
+  margin-bottom: 15px;
+}
+
+.rating {
+  margin-top: 12px;
+}
+
+.userRating {
+  margin-top: 12px;
+  color: #facc15;
+}
+
+.star {
+  font-size: 28px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.star:hover {
+  transform: scale(1.2);
+}
+
+.buttonGroup {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.buttonGroup button {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: #3b82f6;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 15px;
+}
+
+.buttonGroup button:hover {
+  background: #2563eb;
+}

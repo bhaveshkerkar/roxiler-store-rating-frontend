@@ -1,0 +1,86 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background: rgba(0, 0, 0, 0.7);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 1000;
+}
+
+.modal {
+  background: #1e293b;
+  color: white;
+
+  width: 420px;
+  padding: 35px;
+
+  border-radius: 20px;
+
+  position: relative;
+
+  text-align: center;
+
+  animation: popup 0.3s ease;
+}
+
+.storeIcon {
+  font-size: 55px;
+  margin-bottom: 15px;
+}
+
+.address {
+  margin-top: 10px;
+  color: #cbd5e1;
+}
+
+.rating {
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+.userRating {
+  margin-top: 12px;
+  color: #facc15;
+  font-size: 18px;
+}
+
+.description {
+  margin-top: 20px;
+  line-height: 1.6;
+  color: #cbd5e1;
+}
+
+.closeButton {
+  position: absolute;
+
+  top: 15px;
+  right: 18px;
+
+  background: transparent;
+  border: none;
+
+  color: white;
+
+  font-size: 20px;
+  cursor: pointer;
+}
+
+@keyframes popup {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
