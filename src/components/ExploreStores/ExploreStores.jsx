@@ -1,10 +1,14 @@
 import { useState } from "react";
+
 import { useNavigate } from "react-router-dom";
+
 import { toast } from "react-toastify";
 
 import StoreCard from "./StoreCard";
 import StoreDetailsModal from "./StoreDetailsModal";
 import RatingModal from "./RatingModal";
+
+import ProfileSidebar from "../ProfileSidebar/ProfileSidebar";
 
 import styles from "./ExploreStores.module.css";
 
@@ -48,7 +52,11 @@ const ExploreStores = () => {
 
   const [submittedRatings, setSubmittedRatings] = useState([]);
 
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   const [storesData, setStoresData] = useState(initialStores);
+
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
 
   const handleRating = (storeId, rating) => {
     const updatedStores = storesData.map((store) =>
@@ -63,13 +71,12 @@ const ExploreStores = () => {
     setStoresData(updatedStores);
   };
 
-  const handleSubmitRating = (storeId, rating, message) => {
+  const handleSubmitRating = (storeId, rating) => {
     const updatedStores = storesData.map((store) =>
       store.id === storeId
         ? {
             ...store,
             userRating: rating,
-            review: message,
           }
         : store,
     );
@@ -107,6 +114,38 @@ const ExploreStores = () => {
 
   return (
     <div className={styles.container}>
+      {/* OLD LOGOUT BUTTON */}
+
+      {/*
+      <div className={styles.topBar}>
+        <button
+          className={styles.logoutButton}
+          onClick={() => {
+            localStorage.removeItem("isLoggedIn");
+
+            toast.success(
+              "Logged out successfully!"
+            );
+
+            navigate("/user/login");
+          }}
+        >
+          Logout
+        </button>
+      </div>
+      */}
+
+      {isLoggedIn && (
+        <div className={styles.topBar}>
+          <button
+            className={styles.profileBtn}
+            onClick={() => setIsSidebarOpen(true)}
+          >
+            👤
+          </button>
+        </div>
+      )}
+
       <h1 className={styles.heading}>Explore Stores</h1>
 
       <div className={styles.searchContainer}>
@@ -160,6 +199,8 @@ const ExploreStores = () => {
         setSelectedStore={setRatingModalStore}
         handleSubmitRating={handleSubmitRating}
       />
+
+      <ProfileSidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
     </div>
   );
 };
