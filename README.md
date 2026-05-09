@@ -105,7 +105,8 @@ StoreSphere/
 ## 1️⃣ Clone Repository
 
 ```bash
-git clone <YOUR_GITHUB_REPOSITORY_LINK>
+git clone https://github.com/bhaveshkerkar/roxiler-store-rating-frontend.git
+git clone https://github.com/bhaveshkerkar/roxiler-store-rating-backend.git
 ```
 
 ---
@@ -125,31 +126,7 @@ npm run dev
 ```bash
 cd backend
 npm install
-npm start
-```
-
----
-
-# 🔑 Environment Variables
-
-Create a `.env` file inside backend folder.
-
-```env
-MYSQLHOST=localhost
-MYSQLPORT=3306
-MYSQLUSER=root
-MYSQLPASSWORD=yourpassword
-MYSQLDATABASE=storesphere
-```
-
----
-
-# 🗄️ Database Setup
-
-Run the following command in MySQL:
-
-```sql
-CREATE DATABASE storesphere;
+npm run dev
 ```
 
 ---
@@ -233,8 +210,8 @@ This project helped in understanding:
 
 ## Bhavesh Kerkar
 
-* GitHub: *Add GitHub Link*
-* LinkedIn: *Add LinkedIn Link*
+* GitHub: https://github.com/bhaveshkerkar
+* LinkedIn: https://www.linkedin.com/in/bhavesh-kerkar-52587928a/
 
 ---
 
