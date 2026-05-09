@@ -1,12 +1,6 @@
-import { useNavigate } from "react-router-dom";
-
-import { toast } from "react-toastify";
-
 import styles from "./ProfileSidebar.module.css";
 
-const ProfileSidebar = ({ isOpen, setIsOpen }) => {
-  const navigate = useNavigate();
-
+const ProfileSidebar = ({ isOpen, setIsOpen, handleLogout }) => {
   const userRole = localStorage.getItem("role");
 
   return (
@@ -33,7 +27,7 @@ const ProfileSidebar = ({ isOpen, setIsOpen }) => {
         <button>Account Settings</button>
       </div>
 
-      <button
+      {/* <button
         className={styles.logoutBtn}
         onClick={() => {
           localStorage.removeItem("isLoggedIn");
@@ -45,6 +39,9 @@ const ProfileSidebar = ({ isOpen, setIsOpen }) => {
           navigate("/user/login");
         }}
       >
+        Logout
+      </button> */}
+      <button className={styles.logoutBtn} onClick={handleLogout}>
         Logout
       </button>
     </div>
