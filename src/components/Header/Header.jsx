@@ -1,8 +1,14 @@
+import { useState } from "react";
+
 import styles from "./Header.module.css";
+
 import { NavLink, useNavigate } from "react-router-dom";
-import { FaShoppingCart } from "react-icons/fa";
+
 import { useSelector, useDispatch } from "react-redux";
+
 import { logout } from "../../stores/slices/authSlice";
+
+import ProfileSidebar from "../ProfileSidebar/ProfileSidebar";
 
 import logo from "../../assets/storesphere.png";
 
@@ -10,10 +16,22 @@ const Header = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
+
   const { isLoggedIn } = useSelector((state) => state.auth);
+
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const handleLogout = () => {
     dispatch(logout());
+
+    localStorage.removeItem("isLoggedIn");
+
+    localStorage.removeItem("role");
+
+    localStorage.removeItem("userName");
+
+    localStorage.removeItem("userEmail");
+
     navigate("/user/login");
   };
 
@@ -21,13 +39,15 @@ const Header = () => {
     <header className={styles.header}>
       <div className={styles.header_container}>
         {/* Logo */}
+
         <NavLink to="/">
           <div className={styles.logo}>
-            <img src={logo} alt="roxiler Logo" />
+            <img src={logo} alt="StoreSphere Logo" />
           </div>
         </NavLink>
 
         {/* Navigation Menu */}
+
         <nav className={styles.navigation}>
           <ul>
             <li>
@@ -41,6 +61,7 @@ const Header = () => {
                 Home
               </NavLink>
             </li>
+
             <li>
               <NavLink
                 to="/explore-stores"
@@ -51,6 +72,7 @@ const Header = () => {
                 Explore Stores
               </NavLink>
             </li>
+
             <li>
               <NavLink
                 to="/about"
@@ -61,6 +83,7 @@ const Header = () => {
                 About Us
               </NavLink>
             </li>
+
             <li>
               <NavLink
                 to="/contact"
@@ -75,12 +98,9 @@ const Header = () => {
         </nav>
 
         {/* Action Buttons */}
+
         <div className={styles.action_buttons}>
-          {isLoggedIn ? (
-            <button className={`btn ${styles.logout}`} onClick={handleLogout}>
-              Logout
-            </button>
-          ) : (
+          {!isLoggedIn ? (
             <>
               <button
                 className={`btn ${styles.login}`}
@@ -96,9 +116,22 @@ const Header = () => {
                 Sign Up
               </button>
             </>
+          ) : (
+            <button
+              className={styles.profileBtn}
+              onClick={() => setIsSidebarOpen(true)}
+            >
+              👤
+            </button>
           )}
         </div>
       </div>
+
+      <ProfileSidebar
+        isOpen={isSidebarOpen}
+        setIsOpen={setIsSidebarOpen}
+        handleLogout={handleLogout}
+      />
     </header>
   );
 };

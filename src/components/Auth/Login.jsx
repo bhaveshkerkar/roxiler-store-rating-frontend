@@ -35,20 +35,27 @@ const Login = () => {
 
       dispatch(
         loginSuccess({
-          user: res.user,
-          token: res.token,
+          user: res.data.user,
+          token: res.data.token,
         }),
       );
 
-      if (res.user.role === "admin") {
+      localStorage.setItem("isLoggedIn", "true");
+
+      localStorage.setItem("role", res.data.user.role);
+
+      localStorage.setItem("userName", res.data.user.name);
+
+      localStorage.setItem("userEmail", res.data.user.email);
+
+      toast.success("Login Successful!");
+
+      if (res.data.user.role === "admin") {
         navigate("/admin/dashboard");
-        toast.success("Login Successful!");
-      } else if (res.user.role === "owner") {
+      } else if (res.data.user.role === "owner") {
         navigate("/owner/dashboard");
-        toast.success("Login Successful!");
       } else {
         navigate("/");
-        toast.success("Login Successful!");
       }
     } catch (error) {
       alert(error.response?.data?.message || "Login failed");
@@ -84,6 +91,7 @@ const Login = () => {
               placeholder="Enter your password"
               value={formData.password}
               onChange={handleChange}
+              autoComplete="current-password"
             />
 
             <span

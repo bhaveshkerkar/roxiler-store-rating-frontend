@@ -83,3 +83,36 @@
   margin-top: 40px;
   color: #94a3b8;
 }
+
+.topBar {
+  display: flex;
+
+  justify-content: flex-end;
+
+  margin-bottom: 20px;
+}
+
+.profileBtn {
+  width: 55px;
+  height: 55px;
+
+  border-radius: 50%;
+
+  border: none;
+
+  background: #2563eb;
+
+  color: white;
+
+  font-size: 24px;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.profileBtn:hover {
+  background: #1d4ed8;
+
+  transform: scale(1.05);
+}

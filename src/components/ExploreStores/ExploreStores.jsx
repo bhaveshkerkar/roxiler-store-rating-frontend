@@ -1,5 +1,7 @@
 import { useState } from "react";
+
 import { useNavigate } from "react-router-dom";
+
 import { toast } from "react-toastify";
 
 import StoreCard from "./StoreCard";
@@ -8,6 +10,8 @@ import RatingModal from "./RatingModal";
 
 import { useEffect } from "react";
 import api from "../../services/api";
+
+import ProfileSidebar from "../ProfileSidebar/ProfileSidebar";
 
 import styles from "./ExploreStores.module.css";
 
@@ -38,6 +42,8 @@ const ExploreStores = () => {
   useEffect(() => {
     fetchStores();
   }, []);
+
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const handleSubmitRating = async (storeId, rating) => {
     try {
@@ -91,6 +97,38 @@ const ExploreStores = () => {
 
   return (
     <div className={styles.container}>
+      {/* OLD LOGOUT BUTTON */}
+
+      {/*
+      <div className={styles.topBar}>
+        <button
+          className={styles.logoutButton}
+          onClick={() => {
+            localStorage.removeItem("isLoggedIn");
+
+            toast.success(
+              "Logged out successfully!"
+            );
+
+            navigate("/user/login");
+          }}
+        >
+          Logout
+        </button>
+      </div>
+      */}
+
+      {isLoggedIn && (
+        <div className={styles.topBar}>
+          <button
+            className={styles.profileBtn}
+            onClick={() => setIsSidebarOpen(true)}
+          >
+            👤
+          </button>
+        </div>
+      )}
+
       <h1 className={styles.heading}>Explore Stores</h1>
 
       <div className={styles.searchContainer}>
@@ -142,6 +180,8 @@ const ExploreStores = () => {
         setSelectedStore={setRatingModalStore}
         handleSubmitRating={handleSubmitRating}
       />
+
+      <ProfileSidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
     </div>
   );
 };
