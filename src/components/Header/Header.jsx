@@ -2,9 +2,19 @@ import styles from "./Header.module.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
 import logo from "../../assets/logo.png";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../../stores/slices/authSlice";
 
 const Header = () => {
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+  const { isLoggedIn } = useSelector((state) => state.auth);
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/user/login");
+  };
 
   return (
     <header className={styles.header}>
@@ -65,25 +75,27 @@ const Header = () => {
 
         {/* Action Buttons */}
         <div className={styles.action_buttons}>
-          <>
-            <button
-              className={`btn ${styles.login}`}
-              onClick={() => {
-                navigate("/user/login");
-              }}
-            >
-              Login
+          {isLoggedIn ? (
+            <button className={`btn ${styles.logout}`} onClick={handleLogout}>
+              Logout
             </button>
+          ) : (
+            <>
+              <button
+                className={`btn ${styles.login}`}
+                onClick={() => navigate("/user/login")}
+              >
+                Login
+              </button>
 
-            <button
-              className={`btn  ${styles.signup}`}
-              onClick={() => {
-                navigate("/user/signup");
-              }}
-            >
-              Sign Up
-            </button>
-          </>
+              <button
+                className={`btn ${styles.signup}`}
+                onClick={() => navigate("/user/signup")}
+              >
+                Sign Up
+              </button>
+            </>
+          )}
         </div>
       </div>
     </header>

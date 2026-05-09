@@ -27,20 +27,15 @@ const Login = () => {
   const handleLogin = async (e, formData) => {
     e.preventDefault();
 
-    console.log("handle login called!!!");
-
     try {
       const res = await loginUser(formData);
 
-      console.log(res);
       dispatch(
         loginSuccess({
           user: res.user,
           token: res.token,
         }),
       );
-
-      console.log(res.user.role);
 
       if (res.user.role === "admin") {
         navigate("/admin/dashboard");

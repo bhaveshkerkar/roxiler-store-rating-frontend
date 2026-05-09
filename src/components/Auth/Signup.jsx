@@ -1,7 +1,12 @@
 import { useState } from "react";
 import styles from "./Signup.module.css";
 
+import { signupUser } from "../../services/authService";
+import { useNavigate } from "react-router-dom";
+
 const Signup = () => {
+  const navigate = useNavigate();
+
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -50,13 +55,19 @@ const Signup = () => {
 
     return Object.keys(newErrors).length === 0;
   };
-  const handleSubmit = (e) => {
+
+  const handleSignup = async (e, formData) => {
     e.preventDefault();
 
-    if (validateForm()) {
-      alert("Signup Successful!");
-
+    try {
       console.log(formData);
+      const res = await signupUser(formData);
+
+      alert(res.message);
+
+      navigate("/user/login");
+    } catch (error) {
+      alert(error.response?.data?.message || "Signup failed");
     }
   };
 
@@ -67,7 +78,10 @@ const Signup = () => {
 
         <p className={styles.subtitle}>Join Roxiler Store Rating Platform</p>
 
-        <form className={styles.form} onSubmit={handleSubmit}>
+        <form
+          className={styles.form}
+          onSubmit={(e) => handleSignup(e, formData)}
+        >
           <input
             type="text"
             name="name"
