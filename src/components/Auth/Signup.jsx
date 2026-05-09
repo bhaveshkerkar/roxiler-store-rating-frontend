@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 import styles from "./Signup.module.css";
 
 import { signupUser } from "../../services/authService";
-import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -20,8 +19,6 @@ const Signup = () => {
   });
 
   const [errors, setErrors] = useState({});
-
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({

@@ -1,13 +1,9 @@
 import { useState } from "react";
-
 import { useNavigate } from "react-router-dom";
-
 import { toast } from "react-toastify";
 
 import StoreCard from "./StoreCard";
-
 import StoreDetailsModal from "./StoreDetailsModal";
-
 import RatingModal from "./RatingModal";
 
 import styles from "./ExploreStores.module.css";
@@ -111,23 +107,6 @@ const ExploreStores = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.topBar}>
-        <button
-          className={styles.logoutButton}
-          onClick={() => {
-            localStorage.removeItem("isLoggedIn");
-
-            localStorage.removeItem("role");
-
-            toast.success("Logged out successfully!");
-
-            navigate("/user/login");
-          }}
-        >
-          Logout
-        </button>
-      </div>
-
       <h1 className={styles.heading}>Explore Stores</h1>
 
       <div className={styles.searchContainer}>
