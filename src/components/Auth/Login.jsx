@@ -24,10 +24,16 @@ const Login = () => {
     e.preventDefault();
 
     if (formData.email === "admin@gmail.com") {
+      localStorage.setItem("isLoggedIn", "true");
+
       navigate("/admin/dashboard");
     } else if (formData.email === "owner@gmail.com") {
+      localStorage.setItem("isLoggedIn", "true");
+
       navigate("/owner/dashboard");
     } else {
+      localStorage.setItem("isLoggedIn", "true");
+
       navigate("/explore-stores");
     }
   };

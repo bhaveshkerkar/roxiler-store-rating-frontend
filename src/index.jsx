@@ -9,6 +9,8 @@ import Signup from "./components/Auth/Signup";
 import AdminDashboard from "./components/Dashboard/AdminDashboard";
 import OwnerDashboard from "./components/Dashboard/OwnerDashboard";
 
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+
 import App from "./routes/App";
 
 const router = createBrowserRouter([
@@ -36,9 +38,14 @@ const router = createBrowserRouter([
         path: "/user/signup",
         element: <Signup />,
       },
+
       {
         path: "/admin/dashboard",
-        element: <AdminDashboard />,
+        element: (
+          <ProtectedRoute>
+            <AdminDashboard />
+          </ProtectedRoute>
+        ),
       },
 
       {
