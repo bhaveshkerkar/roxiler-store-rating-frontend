@@ -1,8 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
 import styles from "./Signup.module.css";
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -11,6 +15,9 @@ const Signup = () => {
   });
 
   const [errors, setErrors] = useState({});
+
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -50,13 +57,16 @@ const Signup = () => {
 
     return Object.keys(newErrors).length === 0;
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (validateForm()) {
-      alert("Signup Successful!");
+      toast.success("Signup Successful!");
 
       console.log(formData);
+
+      navigate("/user/login");
     }
   };
 
@@ -74,24 +84,29 @@ const Signup = () => {
             placeholder="Enter your full name"
             value={formData.name}
             onChange={handleChange}
+            autoComplete="name"
           />
 
           {errors.name && <p className={styles.error}>{errors.name}</p>}
+
           <input
             type="email"
             name="email"
             placeholder="Enter your email"
             value={formData.email}
             onChange={handleChange}
+            autoComplete="email"
           />
 
           {errors.email && <p className={styles.error}>{errors.email}</p>}
+
           <textarea
             name="address"
             placeholder="Enter your address"
             rows="4"
             value={formData.address}
             onChange={handleChange}
+            autoComplete="street-address"
           />
 
           {errors.address && <p className={styles.error}>{errors.address}</p>}
@@ -103,6 +118,7 @@ const Signup = () => {
               placeholder="Create password"
               value={formData.password}
               onChange={handleChange}
+              autoComplete="new-password"
             />
 
             <span
@@ -120,7 +136,7 @@ const Signup = () => {
 
         <p className={styles.loginText}>
           Already have an account?
-          <span> Login</span>
+          <span onClick={() => navigate("/user/login")}> Login</span>
         </p>
       </div>
     </div>

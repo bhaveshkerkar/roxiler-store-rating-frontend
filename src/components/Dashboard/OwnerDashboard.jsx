@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 import styles from "./OwnerDashboard.module.css";
+import { toast } from "react-toastify";
 
 const OwnerDashboard = () => {
   const navigate = useNavigate();
@@ -10,7 +11,15 @@ const OwnerDashboard = () => {
       <div className={styles.topBar}>
         <button
           className={styles.logoutButton}
-          onClick={() => navigate("/user/login")}
+          onClick={() => {
+            localStorage.removeItem("isLoggedIn");
+
+            localStorage.removeItem("role");
+
+            toast.success("Logged out successfully!");
+
+            navigate("/user/login");
+          }}
         >
           Logout
         </button>

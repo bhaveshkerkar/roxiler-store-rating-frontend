@@ -11,6 +11,9 @@ import OwnerDashboard from "./components/Dashboard/OwnerDashboard";
 
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 
+import About from "./components/About/About";
+import Contact from "./components/Contact/Contact";
+
 import App from "./routes/App";
 
 const router = createBrowserRouter([
@@ -26,7 +29,11 @@ const router = createBrowserRouter([
 
       {
         path: "/explore-stores",
-        element: <ExploreStores />,
+        element: (
+          <ProtectedRoute allowedRole="user">
+            <ExploreStores />
+          </ProtectedRoute>
+        ),
       },
 
       {
@@ -42,15 +49,27 @@ const router = createBrowserRouter([
       {
         path: "/admin/dashboard",
         element: (
-          <ProtectedRoute>
+          <ProtectedRoute allowedRole="admin">
             <AdminDashboard />
           </ProtectedRoute>
         ),
       },
+      {
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
+      },
 
       {
         path: "/owner/dashboard",
-        element: <OwnerDashboard />,
+        element: (
+          <ProtectedRoute allowedRole="owner">
+            <OwnerDashboard />
+          </ProtectedRoute>
+        ),
       },
     ],
   },

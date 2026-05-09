@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import StoreDetailsModal from "./StoreDetailsModal";
 import StoreCard from "./StoreCard";
 
+import { toast } from "react-toastify";
+
 import styles from "./ExploreStores.module.css";
 
 const initialStores = [
@@ -53,7 +55,7 @@ const ExploreStores = () => {
     if (!submittedRatings.includes(storeId)) {
       setSubmittedRatings([...submittedRatings, storeId]);
 
-      alert("Rating submitted successfully!");
+      toast.success("Rating submitted successfully!");
     }
   };
 
@@ -84,7 +86,13 @@ const ExploreStores = () => {
       <div className={styles.topBar}>
         <button
           className={styles.logoutButton}
-          onClick={() => navigate("/user/login")}
+          onClick={() => {
+            localStorage.removeItem("isLoggedIn");
+
+            toast.success("Logged out successfully!");
+
+            navigate("/user/login");
+          }}
         >
           Logout
         </button>

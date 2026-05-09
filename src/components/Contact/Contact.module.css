@@ -1,0 +1,84 @@
+.container {
+  min-height: 100vh;
+
+  background: #08122e;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 120px 20px;
+}
+
+.contactCard {
+  width: 600px;
+
+  background: #1e293b;
+
+  padding: 40px;
+
+  border-radius: 20px;
+
+  color: white;
+}
+
+.contactCard h1 {
+  text-align: center;
+
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  text-align: center;
+
+  color: #94a3b8;
+
+  margin-bottom: 30px;
+}
+
+.form {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 20px;
+}
+
+.form input,
+.form textarea {
+  width: 100%;
+
+  padding: 15px;
+
+  border: none;
+  border-radius: 10px;
+
+  outline: none;
+
+  font-size: 15px;
+}
+
+.form textarea {
+  resize: none;
+}
+
+.form button {
+  padding: 15px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: #2563eb;
+
+  color: white;
+
+  font-size: 16px;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.form button:hover {
+  background: #1d4ed8;
+}

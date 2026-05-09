@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import styles from "./Login.module.css";
 
@@ -26,13 +27,25 @@ const Login = () => {
     if (formData.email === "admin@gmail.com") {
       localStorage.setItem("isLoggedIn", "true");
 
+      localStorage.setItem("role", "admin");
+
+      toast.success("Login Successful!");
+
       navigate("/admin/dashboard");
     } else if (formData.email === "owner@gmail.com") {
       localStorage.setItem("isLoggedIn", "true");
 
+      localStorage.setItem("role", "owner");
+
+      toast.success("Login Successful!");
+
       navigate("/owner/dashboard");
     } else {
       localStorage.setItem("isLoggedIn", "true");
+
+      localStorage.setItem("role", "user");
+
+      toast.success("Login Successful!");
 
       navigate("/explore-stores");
     }
@@ -52,12 +65,13 @@ const Login = () => {
             placeholder="Enter your email"
             value={formData.email}
             onChange={handleChange}
+            autoComplete="username"
           />
 
           <div className={styles.passwordContainer}>
             <input
               type={showPassword ? "text" : "password"}
-              name="password"
+              autoComplete="current-password"
               placeholder="Enter your password"
               value={formData.password}
               onChange={handleChange}
