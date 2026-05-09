@@ -40,14 +40,6 @@ const Login = () => {
         }),
       );
 
-      localStorage.setItem("isLoggedIn", "true");
-
-      localStorage.setItem("role", res.data.user.role);
-
-      localStorage.setItem("userName", res.data.user.name);
-
-      localStorage.setItem("userEmail", res.data.user.email);
-
       toast.success("Login Successful!");
 
       if (res.data.user.role === "admin") {

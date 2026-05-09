@@ -14,6 +14,7 @@ import api from "../../services/api";
 import ProfileSidebar from "../ProfileSidebar/ProfileSidebar";
 
 import styles from "./ExploreStores.module.css";
+import { useSelector } from "react-redux";
 
 const ExploreStores = () => {
   const navigate = useNavigate();
@@ -27,6 +28,8 @@ const ExploreStores = () => {
   const [ratingModalStore, setRatingModalStore] = useState(null);
 
   const [storesData, setStoresData] = useState([]);
+
+  const { isLoggedIn } = useSelector((state) => state.auth);
 
   const fetchStores = async () => {
     try {
