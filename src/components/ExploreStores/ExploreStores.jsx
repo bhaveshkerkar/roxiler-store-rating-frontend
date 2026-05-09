@@ -11,10 +11,7 @@ import RatingModal from "./RatingModal";
 import { useEffect } from "react";
 import api from "../../services/api";
 
-import ProfileSidebar from "../ProfileSidebar/ProfileSidebar";
-
 import styles from "./ExploreStores.module.css";
-import { useSelector } from "react-redux";
 
 const ExploreStores = () => {
   const navigate = useNavigate();
@@ -28,8 +25,6 @@ const ExploreStores = () => {
   const [ratingModalStore, setRatingModalStore] = useState(null);
 
   const [storesData, setStoresData] = useState([]);
-
-  const { isLoggedIn } = useSelector((state) => state.auth);
 
   const fetchStores = async () => {
     try {
@@ -45,8 +40,6 @@ const ExploreStores = () => {
   useEffect(() => {
     fetchStores();
   }, []);
-
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const handleSubmitRating = async (storeId, rating) => {
     try {
@@ -70,6 +63,7 @@ const ExploreStores = () => {
     } catch (error) {
       if (error.response?.data?.message == "Access denied. Token missing") {
         toast.error("Please Login Before Submiting Rating!!!");
+        navigate("/user/login");
       } else {
         toast.error(error.response?.data?.message || "Rating failed");
       }
@@ -100,38 +94,6 @@ const ExploreStores = () => {
 
   return (
     <div className={styles.container}>
-      {/* OLD LOGOUT BUTTON */}
-
-      {/*
-      <div className={styles.topBar}>
-        <button
-          className={styles.logoutButton}
-          onClick={() => {
-            localStorage.removeItem("isLoggedIn");
-
-            toast.success(
-              "Logged out successfully!"
-            );
-
-            navigate("/user/login");
-          }}
-        >
-          Logout
-        </button>
-      </div>
-      */}
-
-      {isLoggedIn && (
-        <div className={styles.topBar}>
-          <button
-            className={styles.profileBtn}
-            onClick={() => setIsSidebarOpen(true)}
-          >
-            👤
-          </button>
-        </div>
-      )}
-
       <h1 className={styles.heading}>Explore Stores</h1>
 
       <div className={styles.searchContainer}>
@@ -183,8 +145,6 @@ const ExploreStores = () => {
         setSelectedStore={setRatingModalStore}
         handleSubmitRating={handleSubmitRating}
       />
-
-      <ProfileSidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
     </div>
   );
 };

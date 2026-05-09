@@ -23,15 +23,6 @@ const Header = () => {
 
   const handleLogout = () => {
     dispatch(logout());
-
-    localStorage.removeItem("isLoggedIn");
-
-    localStorage.removeItem("role");
-
-    localStorage.removeItem("userName");
-
-    localStorage.removeItem("userEmail");
-
     navigate("/user/login");
   };
 

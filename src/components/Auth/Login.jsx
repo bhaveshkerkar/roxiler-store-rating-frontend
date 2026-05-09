@@ -35,21 +35,22 @@ const Login = () => {
 
       dispatch(
         loginSuccess({
-          user: res.data.user,
-          token: res.data.token,
+          user: res.user,
+          token: res.token,
         }),
       );
 
       toast.success("Login Successful!");
 
-      if (res.data.user.role === "admin") {
+      if (res.user.role === "admin") {
         navigate("/admin/dashboard");
-      } else if (res.data.user.role === "owner") {
+      } else if (res.user.role === "owner") {
         navigate("/owner/dashboard");
       } else {
         navigate("/");
       }
     } catch (error) {
+      console.log(error);
       alert(error.response?.data?.message || "Login failed");
     }
   };
