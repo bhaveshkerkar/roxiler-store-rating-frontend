@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import { toast } from "react-toastify";
+
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "../../stores/slices/authSlice";
+import { loginUser } from "../../services/authService";
 
 import styles from "./Login.module.css";
 
@@ -12,8 +17,6 @@ const Login = () => {
     password: "",
   });
 
-  const navigate = useNavigate();
-
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -21,33 +24,34 @@ const Login = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogin = async (e, formData) => {
     e.preventDefault();
 
-    if (formData.email === "admin@gmail.com") {
-      localStorage.setItem("isLoggedIn", "true");
+    try {
+      const res = await loginUser(formData);
 
-      localStorage.setItem("role", "admin");
+      dispatch(
+        loginSuccess({
+          user: res.user,
+          token: res.token,
+        }),
+      );
 
-      toast.success("Login Successful!");
-
-      navigate("/admin/dashboard");
-    } else if (formData.email === "owner@gmail.com") {
-      localStorage.setItem("isLoggedIn", "true");
-
-      localStorage.setItem("role", "owner");
-
-      toast.success("Login Successful!");
-
-      navigate("/owner/dashboard");
-    } else {
-      localStorage.setItem("isLoggedIn", "true");
-
-      localStorage.setItem("role", "user");
-
-      toast.success("Login Successful!");
-
-      navigate("/explore-stores");
+      if (res.user.role === "admin") {
+        navigate("/admin/dashboard");
+        toast.success("Login Successful!");
+      } else if (res.user.role === "owner") {
+        navigate("/owner/dashboard");
+        toast.success("Login Successful!");
+      } else {
+        navigate("/");
+        toast.success("Login Successful!");
+      }
+    } catch (error) {
+      alert(error.response?.data?.message || "Login failed");
     }
   };
 
@@ -58,7 +62,12 @@ const Login = () => {
 
         <p className={styles.subtitle}>Login to continue exploring stores</p>
 
-        <form className={styles.form} onSubmit={handleSubmit}>
+        <form
+          className={styles.form}
+          onSubmit={(e) => {
+            handleLogin(e, formData);
+          }}
+        >
           <input
             type="email"
             name="email"
