@@ -1,9 +1,10 @@
 import styles from "./Header.module.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
-import logo from "../../assets/logo.png";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../stores/slices/authSlice";
+
+import logo from "../../assets/storesphere.png";
 
 const Header = () => {
   const navigate = useNavigate();

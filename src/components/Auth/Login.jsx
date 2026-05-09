@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+import { toast } from "react-toastify";
+
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../../stores/slices/authSlice";
 import { loginUser } from "../../services/authService";
@@ -39,10 +42,13 @@ const Login = () => {
 
       if (res.user.role === "admin") {
         navigate("/admin/dashboard");
+        toast.success("Login Successful!");
       } else if (res.user.role === "owner") {
         navigate("/owner/dashboard");
+        toast.success("Login Successful!");
       } else {
         navigate("/");
+        toast.success("Login Successful!");
       }
     } catch (error) {
       alert(error.response?.data?.message || "Login failed");
@@ -68,6 +74,7 @@ const Login = () => {
             placeholder="Enter your email"
             value={formData.email}
             onChange={handleChange}
+            autoComplete="username"
           />
 
           <div className={styles.passwordContainer}>

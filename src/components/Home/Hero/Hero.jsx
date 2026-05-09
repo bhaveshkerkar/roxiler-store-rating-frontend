@@ -1,42 +1,54 @@
 import styles from "./Hero.module.css";
 import { useNavigate } from "react-router-dom";
 
-import herosectionVideo from "../../../assets/Home/Hero.mp4";
-
 const Hero = () => {
   const navigate = useNavigate();
 
   return (
     <section className={styles.hero}>
-      <div className={styles.video_background}>
-        <video autoPlay muted loop>
-          <source src={herosectionVideo} type="video/mp4" />
-          {/* Your browser does not support the video tag. */}
-        </video>
-      </div>
-
-      <div className={styles.overlay}></div>
-
       <div className={styles.content}>
-        <h1>Discover Stores For You</h1>
+        <div className={styles.badge}>⭐ Roxiler Store Rating Platform</div>
+
+        <h1>
+          Find. Rate. Discover.
+          <span>The Best Stores Near You.</span>
+        </h1>
+
         <p>
-          Explore registered stores, check ratings, and share your own
-          experience with honest reviews.
+          Explore trusted stores, share honest ratings, and help others make
+          smarter shopping decisions every day.
         </p>
+
+        <div className={styles.features}>
+          <div className={styles.featureCard}>
+            <h3>🔍 Discover</h3>
+            <p>Find stores that match your needs.</p>
+          </div>
+
+          <div className={styles.featureCard}>
+            <h3>⭐ Rate</h3>
+            <p>Share your real experience instantly.</p>
+          </div>
+
+          <div className={styles.featureCard}>
+            <h3>👥 Help Others</h3>
+            <p>Guide users with genuine feedback.</p>
+          </div>
+        </div>
 
         <div className={styles.buttons}>
           <button
-            className={`btn ${styles.exploreStoresBtn}`}
-            onClick={() => navigate("/roxiler/explore-stores")}
+            className={styles.exploreBtn}
+            onClick={() => navigate("/explore-stores")}
           >
-            Explore Stores
+            Explore Stores →
           </button>
 
           <button
-            className={`btn ${styles.getStartedBtn}`}
-            onClick={() => navigate("/roxiler/user/signup")}
+            className={styles.startedBtn}
+            onClick={() => navigate("/user/signup")}
           >
-            Get Started
+            Get Started →
           </button>
         </div>
       </div>
