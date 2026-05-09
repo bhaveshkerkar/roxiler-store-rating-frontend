@@ -4,8 +4,8 @@ const StoreCard = ({
   store,
   handleRating,
   setSelectedStore,
-  handleSubmitRating,
   submittedRatings,
+  setRatingModalStore,
 }) => {
   return (
     <div className={styles.card}>
@@ -32,7 +32,7 @@ const StoreCard = ({
       </div>
 
       <div className={styles.buttonGroup}>
-        <button onClick={() => handleSubmitRating(store.id)}>
+        <button onClick={() => setRatingModalStore(store)}>
           {submittedRatings.includes(store.id) ? "Update Rating" : "Rate Store"}
         </button>
 

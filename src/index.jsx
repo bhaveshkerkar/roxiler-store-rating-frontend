@@ -30,9 +30,9 @@ const router = createBrowserRouter([
       {
         path: "/explore-stores",
         element: (
-          <ProtectedRoute allowedRole="user">
-            <ExploreStores />
-          </ProtectedRoute>
+          // <ProtectedRoute allowedRole="user">
+          <ExploreStores />
+          // </ProtectedRoute>
         ),
       },
 

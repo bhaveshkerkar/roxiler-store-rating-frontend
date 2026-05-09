@@ -80,7 +80,7 @@ const Login = () => {
           <div className={styles.passwordContainer}>
             <input
               type={showPassword ? "text" : "password"}
-              autoComplete="current-password"
+              name="password"
               placeholder="Enter your password"
               value={formData.password}
               onChange={handleChange}

@@ -1,10 +1,14 @@
 import { useState } from "react";
+
 import { useNavigate } from "react-router-dom";
 
-import StoreDetailsModal from "./StoreDetailsModal";
+import { toast } from "react-toastify";
+
 import StoreCard from "./StoreCard";
 
-import { toast } from "react-toastify";
+import StoreDetailsModal from "./StoreDetailsModal";
+
+import RatingModal from "./RatingModal";
 
 import styles from "./ExploreStores.module.css";
 
@@ -15,6 +19,7 @@ const initialStores = [
     address: "Andheri, Mumbai",
     rating: 4.5,
     userRating: 4,
+    review: "",
   },
   {
     id: 2,
@@ -22,6 +27,7 @@ const initialStores = [
     address: "Pune, Maharashtra",
     rating: 3.8,
     userRating: 5,
+    review: "",
   },
   {
     id: 3,
@@ -29,6 +35,7 @@ const initialStores = [
     address: "Bandra, Mumbai",
     rating: 4.2,
     userRating: 3,
+    review: "",
   },
 ];
 
@@ -36,8 +43,12 @@ const ExploreStores = () => {
   const navigate = useNavigate();
 
   const [searchTerm, setSearchTerm] = useState("");
+
   const [sortOption, setSortOption] = useState("");
+
   const [selectedStore, setSelectedStore] = useState(null);
+
+  const [ratingModalStore, setRatingModalStore] = useState(null);
 
   const [submittedRatings, setSubmittedRatings] = useState([]);
 
@@ -45,18 +56,35 @@ const ExploreStores = () => {
 
   const handleRating = (storeId, rating) => {
     const updatedStores = storesData.map((store) =>
-      store.id === storeId ? { ...store, userRating: rating } : store,
+      store.id === storeId
+        ? {
+            ...store,
+            userRating: rating,
+          }
+        : store,
     );
 
     setStoresData(updatedStores);
   };
 
-  const handleSubmitRating = (storeId) => {
+  const handleSubmitRating = (storeId, rating, message) => {
+    const updatedStores = storesData.map((store) =>
+      store.id === storeId
+        ? {
+            ...store,
+            userRating: rating,
+            review: message,
+          }
+        : store,
+    );
+
+    setStoresData(updatedStores);
+
     if (!submittedRatings.includes(storeId)) {
       setSubmittedRatings([...submittedRatings, storeId]);
-
-      toast.success("Rating submitted successfully!");
     }
+
+    toast.success("Rating submitted successfully!");
   };
 
   const filteredStores = storesData.filter(
@@ -88,6 +116,8 @@ const ExploreStores = () => {
           className={styles.logoutButton}
           onClick={() => {
             localStorage.removeItem("isLoggedIn");
+
+            localStorage.removeItem("role");
 
             toast.success("Logged out successfully!");
 
@@ -132,8 +162,8 @@ const ExploreStores = () => {
               store={store}
               handleRating={handleRating}
               setSelectedStore={setSelectedStore}
-              handleSubmitRating={handleSubmitRating}
               submittedRatings={submittedRatings}
+              setRatingModalStore={setRatingModalStore}
             />
           ))
         ) : (
@@ -144,6 +174,12 @@ const ExploreStores = () => {
       <StoreDetailsModal
         selectedStore={selectedStore}
         setSelectedStore={setSelectedStore}
+      />
+
+      <RatingModal
+        selectedStore={ratingModalStore}
+        setSelectedStore={setRatingModalStore}
+        handleSubmitRating={handleSubmitRating}
       />
     </div>
   );
