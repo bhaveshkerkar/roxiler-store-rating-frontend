@@ -6,34 +6,10 @@ import StoreCard from "./StoreCard";
 import StoreDetailsModal from "./StoreDetailsModal";
 import RatingModal from "./RatingModal";
 
-import styles from "./ExploreStores.module.css";
+import { useEffect } from "react";
+import api from "../../services/api";
 
-const initialStores = [
-  {
-    id: 1,
-    name: "Fresh Mart",
-    address: "Andheri, Mumbai",
-    rating: 4.5,
-    userRating: 4,
-    review: "",
-  },
-  {
-    id: 2,
-    name: "Tech Plaza",
-    address: "Pune, Maharashtra",
-    rating: 3.8,
-    userRating: 5,
-    review: "",
-  },
-  {
-    id: 3,
-    name: "Coffee Corner",
-    address: "Bandra, Mumbai",
-    rating: 4.2,
-    userRating: 3,
-    review: "",
-  },
-];
+import styles from "./ExploreStores.module.css";
 
 const ExploreStores = () => {
   const navigate = useNavigate();
@@ -46,41 +22,49 @@ const ExploreStores = () => {
 
   const [ratingModalStore, setRatingModalStore] = useState(null);
 
-  const [submittedRatings, setSubmittedRatings] = useState([]);
+  const [storesData, setStoresData] = useState([]);
 
-  const [storesData, setStoresData] = useState(initialStores);
+  const fetchStores = async () => {
+    try {
+      const res = await api.get("/stores");
 
-  const handleRating = (storeId, rating) => {
-    const updatedStores = storesData.map((store) =>
-      store.id === storeId
-        ? {
-            ...store,
-            userRating: rating,
-          }
-        : store,
-    );
-
-    setStoresData(updatedStores);
+      setStoresData(res.data.stores);
+    } catch (error) {
+      toast.error("Failed to fetch stores");
+    }
   };
 
-  const handleSubmitRating = (storeId, rating, message) => {
-    const updatedStores = storesData.map((store) =>
-      store.id === storeId
-        ? {
-            ...store,
-            userRating: rating,
-            review: message,
-          }
-        : store,
-    );
+  // fetch stores data
+  useEffect(() => {
+    fetchStores();
+  }, []);
 
-    setStoresData(updatedStores);
+  const handleSubmitRating = async (storeId, rating) => {
+    try {
+      const selectedStore = storesData.find((store) => store.id === storeId);
 
-    if (!submittedRatings.includes(storeId)) {
-      setSubmittedRatings([...submittedRatings, storeId]);
+      if (selectedStore.userRating != null) {
+        await api.put("/user/rate", {
+          storeId,
+          rating,
+        });
+      } else {
+        await api.post("/user/rate", {
+          storeId,
+          rating,
+        });
+      }
+
+      toast.success("Rating submitted successfully!");
+
+      fetchStores();
+    } catch (error) {
+      if (error.response?.data?.message == "Access denied. Token missing") {
+        toast.error("Please Login Before Submiting Rating!!!");
+      } else {
+        toast.error(error.response?.data?.message || "Rating failed");
+      }
     }
-
-    toast.success("Rating submitted successfully!");
   };
 
   const filteredStores = storesData.filter(
@@ -139,9 +123,7 @@ const ExploreStores = () => {
             <StoreCard
               key={store.id}
               store={store}
-              handleRating={handleRating}
               setSelectedStore={setSelectedStore}
-              submittedRatings={submittedRatings}
               setRatingModalStore={setRatingModalStore}
             />
           ))

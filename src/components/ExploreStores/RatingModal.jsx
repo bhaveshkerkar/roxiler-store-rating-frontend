@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import styles from "./RatingModal.module.css";
 
@@ -7,14 +7,20 @@ const RatingModal = ({
   setSelectedStore,
   handleSubmitRating,
 }) => {
-  const [rating, setRating] = useState(selectedStore?.userRating || 0);
+  const [rating, setRating] = useState(0);
 
-  const [message, setMessage] = useState("");
+  useEffect(() => {
+    if (selectedStore) {
+      setRating(selectedStore.userRating || 0);
+    }
+  }, [selectedStore]);
+
+  // const [message, setMessage] = useState("");
 
   if (!selectedStore) return null;
 
   const submitHandler = () => {
-    handleSubmitRating(selectedStore.id, rating, message);
+    handleSubmitRating(selectedStore.id, rating);
 
     setSelectedStore(null);
   };
@@ -41,13 +47,12 @@ const RatingModal = ({
           </p>
 
           <p>
-            <strong>Overall Rating:</strong> ⭐ {selectedStore.rating}
+            <strong>Overall Rating:</strong> ⭐ {selectedStore.overallRating}
           </p>
         </div>
 
         <div className={styles.ratingSection}>
           <p>Your Rating</p>
-
           <div className={styles.stars}>
             {[1, 2, 3, 4, 5].map((star) => (
               <span key={star} onClick={() => setRating(star)}>
