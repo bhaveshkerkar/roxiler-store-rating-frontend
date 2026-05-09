@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "../../stores/slices/authSlice";
+import { loginUser } from "../../services/authService";
 
 import styles from "./Login.module.css";
 
@@ -11,8 +14,6 @@ const Login = () => {
     password: "",
   });
 
-  const navigate = useNavigate();
-
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -20,21 +21,36 @@ const Login = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogin = async (e, formData) => {
     e.preventDefault();
 
-    if (formData.email === "admin@gmail.com") {
-      localStorage.setItem("isLoggedIn", "true");
+    console.log("handle login called!!!");
 
-      navigate("/admin/dashboard");
-    } else if (formData.email === "owner@gmail.com") {
-      localStorage.setItem("isLoggedIn", "true");
+    try {
+      const res = await loginUser(formData);
 
-      navigate("/owner/dashboard");
-    } else {
-      localStorage.setItem("isLoggedIn", "true");
+      console.log(res);
+      dispatch(
+        loginSuccess({
+          user: res.user,
+          token: res.token,
+        }),
+      );
 
-      navigate("/explore-stores");
+      console.log(res.user.role);
+
+      if (res.user.role === "admin") {
+        navigate("/admin/dashboard");
+      } else if (res.user.role === "owner") {
+        navigate("/owner/dashboard");
+      } else {
+        navigate("/");
+      }
+    } catch (error) {
+      alert(error.response?.data?.message || "Login failed");
     }
   };
 
@@ -45,7 +61,12 @@ const Login = () => {
 
         <p className={styles.subtitle}>Login to continue exploring stores</p>
 
-        <form className={styles.form} onSubmit={handleSubmit}>
+        <form
+          className={styles.form}
+          onSubmit={(e) => {
+            handleLogin(e, formData);
+          }}
+        >
           <input
             type="email"
             name="email"
