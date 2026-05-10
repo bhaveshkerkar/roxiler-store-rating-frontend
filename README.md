@@ -1,5 +1,7 @@
 # StoreSphere 🌐
 
+* Project Live Link: https://roxiler-store-rating-frontend.vercel.app/
+
 A modern Store Rating Platform built with React, Node.js, Express, and MySQL that allows users to explore stores, submit ratings, and manage store-related activities through role-based dashboards.
 
 ---
@@ -135,37 +137,42 @@ npm run dev
 
 ## 🏠 Home Page
 
-*Add screenshot here*
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/eea0a49f-9703-402b-8416-8c51b4a87994" />
+
 
 ---
 
 ## 🔍 Explore Stores Page
 
-*Add screenshot here*
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/8b3349c9-d012-4e0f-80e3-1c77ed77dfba" />
 
 ---
 
 ## 🔐 Login Page
 
-*Add screenshot here*
+
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/b64a148e-b022-40aa-b705-c05053653a95" />
 
 ---
 
 ## 📝 Signup Page
 
-*Add screenshot here*
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/7a9cfa71-ba77-4e5b-a9eb-7581c46afa96" />
+
 
 ---
 
 ## 🛠️ Admin Dashboard
 
-*Add screenshot here*
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/8b3b4f76-94ff-4a77-a8d6-50c17d3398a8" />
+
 
 ---
 
 ## 🏪 Store Owner Dashboard
 
-*Add screenshot here*
+
 
 ---
 
@@ -212,6 +219,8 @@ This project helped in understanding:
 
 * GitHub: https://github.com/bhaveshkerkar
 * LinkedIn: https://www.linkedin.com/in/bhavesh-kerkar-52587928a/
+
+* Project Live Link: https://roxiler-store-rating-frontend.vercel.app/
 
 ---
 
