@@ -42,7 +42,7 @@
 
   margin-top: 30px;
 
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 
   color: white;
 }
@@ -109,7 +109,7 @@
 }
 
 .logoutBtn {
-  margin-top: auto;
+  margin-top: 30px;
 
   padding: 15px;
 
@@ -128,4 +128,93 @@
 
 .logoutBtn:hover {
   background: #b91c1c;
+}
+
+.passwordForm {
+  margin-top: 5px;
+  margin-bottom: 0px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 14px;
+}
+
+.passwordInput {
+  width: 100%;
+
+  padding: 10px 16px;
+
+  border: 1px solid #374151;
+
+  border-radius: 12px;
+
+  background: #1f2937;
+
+  color: white;
+
+  font-size: 15px;
+
+  outline: none;
+
+  transition: 0.3s ease;
+}
+
+
+
+.passwordInput::placeholder {
+  color: #9ca3af;
+}
+
+.passwordInput:focus {
+  border-color: #2563eb;
+
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+.saveBtn {
+  padding: 10px !important;
+  border: none;
+
+  border-radius: 12px;
+
+  background: #16a34a;
+
+  color: white;
+
+  font-size: 15px;
+
+  /* font-weight: 600; */
+
+  cursor: pointer;
+
+  transition: 0.3s ease;
+}
+
+.saveBtn:hover {
+  background: #15803d !important;
+}
+
+.passwordContainer {
+  position: relative;
+  width: 100%;
+}
+
+.passwordContainer input {
+  width: 100%;
+  padding-right: 70px;
+}
+
+.showPassword {
+  position: absolute;
+
+  right: 15px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: #2563eb;
+
+  cursor: pointer;
+  font-size: 12px;
 }

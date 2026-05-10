@@ -11,6 +11,7 @@ import { logout } from "../../stores/slices/authSlice";
 import ProfileSidebar from "../ProfileSidebar/ProfileSidebar";
 
 import logo from "../../assets/storesphere.png";
+import { toast } from "react-toastify";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -20,11 +21,6 @@ const Header = () => {
   const { isLoggedIn } = useSelector((state) => state.auth);
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
-  const handleLogout = () => {
-    dispatch(logout());
-    navigate("/user/login");
-  };
 
   return (
     <header className={styles.header}>
@@ -118,11 +114,9 @@ const Header = () => {
         </div>
       </div>
 
-      <ProfileSidebar
-        isOpen={isSidebarOpen}
-        setIsOpen={setIsSidebarOpen}
-        handleLogout={handleLogout}
-      />
+      {isLoggedIn && (
+        <ProfileSidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
+      )}
     </header>
   );
 };

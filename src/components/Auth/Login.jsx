@@ -40,7 +40,7 @@ const Login = () => {
         }),
       );
 
-      toast.success("Login Successful!");
+      toast.success(`Welcome ${res.user.name}`);
 
       if (res.user.role === "admin") {
         navigate("/admin/dashboard");
