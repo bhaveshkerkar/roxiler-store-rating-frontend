@@ -222,7 +222,7 @@ This project helped in understanding:
 
 * Project Live Link: https://roxiler-store-rating-frontend.vercel.app/
 
----
+--
 
 # 📄 License
 
